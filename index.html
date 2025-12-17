@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GANG Consultancy</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      font-family: 'Montserrat', sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    body { touch-action: none; color: white; }
+
+    canvas {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+    }
+
+    /* NAVBAR */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 16px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(10px);
+      z-index: 10;
+    }
+
+    nav .logo {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      position: relative;
+    }
+
+    nav ul li a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background: white;
+      transition: 0.3s;
+    }
+
+    nav ul li a:hover::after { width: 100%; }
+
+    /* SECTIONS */
+    section {
+      min-height: 100vh;
+      padding: 120px 100px 100px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 24px;
+      position: relative;
+    }
+
+    /* SLATE GRADIENT FOR NON-HOME SECTIONS */
+    #about, #services, #contact {
+      background: linear-gradient(135deg, rgba(30,41,59,0.85), rgba(51,65,85,0.85));
+      backdrop-filter: blur(6px);
+    }
+
+    h1 { font-size: 72px; margin: 0; }
+    h2 { font-size: 48px; margin-bottom: 10px; }
+    p { max-width: 800px; line-height: 1.6; }
+
+    /* HOME */
+    #home {
+      align-items: center;
+      text-align: center;
+    }
+
+    /* SERVICES */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+
+    .service-card {
+      background: linear-gradient(145deg, rgba(255,255,255,0.08), rgba(0,0,0,0.4));
+      padding: 30px;
+      border-radius: 20px;
+      backdrop-filter: blur(14px);
+      transform-style: preserve-3d;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .service-card:hover {
+      transform: rotateY(10deg) rotateX(5deg) translateY(-10px);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+    }
+
+    .service-card h3 { margin-top: 0; }
+
+    .service-card ul {
+      padding-left: 20px;
+    }
+
+    .service-card li { margin-bottom: 8px; }
+
+    /* FAQ */
+    .faq-item {
+      background: rgba(0,0,0,0.5);
+      padding: 20px;
+      border-radius: 14px;
+    }
+
+    /* FOOTER */
+    footer {
+      background: linear-gradient(135deg, #1f2933, #374151);
+      padding: 80px 120px;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 50px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    footer h3 { margin-top: 0; }
+
+    footer a { color: white; text-decoration: none; }
+
+    @media(max-width: 768px) {
+      nav { padding: 16px 20px; }
+      section { padding: 120px 30px 60px; }
+      h1 { font-size: 48px; }
+      h2 { font-size: 36px; }
+      footer { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="canvas"></canvas>
+
+<nav>
+  <div class="logo">GANG</div>
+  <ul>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="home">
+  <h1>GANG Consultancy</h1>
+  <p>WE ARE IN IT TOGETHER!</p>
+</section>
+
+<section id="about" data-tilt>
+  <h2>About Us</h2>
+  <p>
+    GANG Consultancy provides end‑to‑end professional services including legal compliance, business registrations, marketing management, and financial advisory. We help individuals and businesses stay compliant, visible, and financially strong.
+  </p>
+</section>
+
+<section id="services" data-tilt>
+  <h2>Our Services</h2>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <h3>Legal Services</h3>
+      <ul>
+        <li>Property Registration</li>
+        <li>Trademark Registration</li>
+        <li>Drafting Legal Documents & Agreements</li>
+        <li>Legal Notices & Replies</li>
+        <li>Due Diligence</li>
+        <li>Marriage Registration</li>
+        <li>Civil & Commercial Legal Opinion</li>
+      </ul>
+    </div>
+
+    <div class="service-card">
+      <h3>Social Media & Marketing</h3>
+      <ul>
+        <li>Social Media Management</li>
+        <li>Content Strategy & Branding</li>
+        <li>Performance Marketing</li>
+        <li>SEO & Online Visibility</li>
+        <li>Lead Generation Campaigns</li>
+      </ul>
+    </div>
+
+    <div class="service-card">
+      <h3>Accountancy & GST</h3>
+      <ul>
+        <li>Bookkeeping & Accounting</li>
+        <li>GST Registration</li>
+        <li>GST Returns Filing</li>
+        <li>Income Tax Filing</li>
+        <li>Compliance & Advisory</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="contact" data-tilt>
+  <h2>Contact Us</h2>
+  <p>Email: contact@gangconsultancy.com</p>
+  <p>Phone: +91 XXXXXXXXXX</p>
+</section>
+
+<footer>
+  <div>
+    <h3>GANG Consultancy</h3>
+    <p>Professional services for legal, marketing and financial growth.</p>
+  </div>
+
+  <div>
+    <h3>Quick Links</h3>
+    <p><a href="#home">Home</a></p>
+    <p><a href="#about">About</a></p>
+    <p><a href="#services">Services</a></p>
+    <p><a href="#contact">Contact</a></p>
+  </div>
+
+  <div>
+    <h3>FAQ</h3>
+    <div class="faq-item">
+      <p><strong>Do you offer online consultations?</strong><br>Yes, we provide online and offline consultations.</p>
+    </div>
+    <div class="faq-item">
+      <p><strong>Do you handle compliance end‑to‑end?</strong><br>Yes, from registration to filings.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js"></script>
+<script>
+  VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {
+    max: 6,
+    speed: 600,
+    glare: true,
+    "max-glare": 0.15
+  });
+</script>
+
+<script type="module">
+  import TubesCursor from "https://cdn.jsdelivr.net/npm/threejs-components@0.0.19/build/cursors/tubes1.min.js";
+
+  const app = TubesCursor(document.getElementById('canvas'), {
+    tubes: {
+      colors: ['#f967fb', '#53bc28', '#6958d5'],
+      lights: {
+        intensity: 200,
+        colors: ['#83f36e', '#fe8a2e', '#ff008a', '#60aed5']
+      }
+    }
+  });
+
+  document.body.addEventListener('click', () => {
+    app.tubes.setColors(randomColors(3));
+    app.tubes.setLightsColors(randomColors(4));
+  });
+
+  function randomColors(count) {
+    return Array.from({ length: count }, () => '#' + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0'));
+  }
+</script>
+
+</body>
+</html>
